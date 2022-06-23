@@ -2,7 +2,6 @@ import 'package:bookshelf_ui/home.dart';
 import 'package:bookshelf_ui/http_service.dart';
 import 'package:bookshelf_ui/signup.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -15,7 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   final _signInFormKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  HttpService _httpService = HttpService();
+  final HttpService _httpService = HttpService();
 
   @override
   void dispose() {

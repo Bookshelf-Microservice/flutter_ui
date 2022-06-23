@@ -15,20 +15,41 @@ class HttpService {
   }
 
   loginUser(email, pass) async {
-    var url = Uri.parse('http://10.0.2.2:8001/login');
-    // var url = Uri.parse('http://localhost:8001/login');
+    // var url = Uri.parse('http://10.0.2.2:8000/user/login');
+    var url = Uri.parse('http://localhost:8000/user/login');
+
     var response = await post(url, body: {'email': email, 'password': pass});
     print('Response status: ${response.statusCode}');
-    print('Response body login: ${response.body}');
-    dynamic res = jsonDecode(response.body);
-    print('Res: ${res['token']}');
-    // setToken(res['token']);
+    // print('Response body login: ${response.body}');
+    if (response.statusCode >= 400) {
+      return response;
+    }
     setToken(email);
     return response;
   }
 
-  Future<User> getUser(Uri url, Object body) async {
-    Response res = await post(url, body: body);
+  signupUser(username, email, password) async {
+    // var url = Uri.parse('http://10.0.2.2:8000/user/signup');
+    var url = Uri.parse('http://localhost:8000/user/signup');
+
+    Response response = await post(url, headers: {
+      'username': username,
+      'email': email,
+      'password': password,
+      'role': 'user'
+    });
+    print('signupUser Response status: ${response.statusCode}');
+    print('signupUser Response body: ${response.body}');
+    return response;
+  }
+
+  Future<User?> getUser(String email) async {
+    // var url = Uri.parse('http://10.0.2.2:8000/user/get');
+    var url = Uri.parse('http://localhost:8000/user/get');
+
+    print('içerde mi');
+    Response res = await get(url, headers: {'email': email});
+    print('Response statusCode: ${res.statusCode}');
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
       dynamic _user = User.fromJson(body);
@@ -39,8 +60,9 @@ class HttpService {
   }
 
   Future<int> logOut() async {
-    var url = Uri.parse('http://10.0.2.2:8001/logout');
-    // var url = Uri.parse('http://localhost:8001/logout');
+    // var url = Uri.parse('http://10.0.2.2:8000/user/logout');
+    var url = Uri.parse('http://localhost:8000/user/logout');
+
     var response = await post(url, body: {});
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
@@ -49,11 +71,13 @@ class HttpService {
   }
 
   Future<int> deleteUser(String email) async {
-    var url = Uri.parse('http://10.0.2.2:8001/deleteUser');
-    // var url = Uri.parse('http://localhost:8001/deleteUser');
-    var response = await post(url, body: {'email': email});
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    // var url = Uri.parse('http://10.0.2.2:8000/user/delete');
+    var url = Uri.parse('http://localhost:8000/user/delete');
+
+    var response = await post(url, headers: {'email': email});
+    print('Response status:/user/delete ${response.statusCode}');
+    print('Response body:  /user/delete ${response.body}');
+    setToken('null');
     return response.statusCode;
   }
 }

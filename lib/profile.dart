@@ -19,9 +19,7 @@ class Profile extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: FutureBuilder(
-            future: httpService.getUser(Uri.http('10.0.2.2:8001', '/getUser'), {
-              'email': userEmail,
-            }),
+            future: httpService.getUser(userEmail),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 var user = snapshot.data;
@@ -49,25 +47,27 @@ class Profile extends StatelessWidget {
                         child: const Text('Log Out')),
                     const SizedBox(height: 24),
                     TextButton(
-                      onPressed: () async {
-                        print('delete user butonu');
-                        var statusCode =
-                            await httpService.deleteUser(userEmail);
-                        if (statusCode == 200) {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginPage(),
-                              ),
-                              (Route<dynamic> route) => false);
-                        }
-                      },
-                      child: const Text('Delete Account'),
-                    ),
+                        onPressed: () async {
+                          print('delete user butonu');
+                          var statusCode =
+                              await httpService.deleteUser(userEmail);
+                          if (statusCode == 200) {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginPage(),
+                                ),
+                                (Route<dynamic> route) => false);
+                          }
+                        },
+                        child: const Text(
+                          'Delete Account',
+                          style: TextStyle(color: Colors.red),
+                        )),
                   ],
                 );
               } else {
-                return const Center(child: const CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
             },
           ),

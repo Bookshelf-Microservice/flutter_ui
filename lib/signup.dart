@@ -1,3 +1,4 @@
+import 'package:bookshelf_ui/http_service.dart';
 import 'package:bookshelf_ui/login.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -14,6 +15,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final HttpService _httpService = HttpService();
 
   @override
   void dispose() {
@@ -85,16 +87,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 ElevatedButton(
                   child: const Text("Sign Up"),
                   onPressed: () async {
-                    // var url = Uri.parse('http://10.0.2.2:8001/signup');
-                    var url = Uri.parse('http://localhost:8001/signup');
-                    var response = await http.post(url, body: {
-                      'username': _usernameController.text,
-                      'email': _emailController.text,
-                      'password': _passwordController.text,
-                      'role': 'user'
-                    });
-                    print('Response status: ${response.statusCode}');
-                    print('Response body: ${response.body}');
+                    var response = await _httpService.signupUser(
+                        _usernameController.text,
+                        _emailController.text,
+                        _passwordController.text);
+
                     if (response.statusCode == 302) {
                       Navigator.push(
                         context,

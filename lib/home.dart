@@ -1,8 +1,11 @@
+import 'package:bookshelf_ui/http_service.dart';
+import 'package:bookshelf_ui/login.dart';
 import 'package:bookshelf_ui/profile.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
   String userEmail;
+  final HttpService httpService = HttpService();
 
   Home({Key? key, required this.userEmail}) : super(key: key);
 
@@ -23,6 +26,20 @@ class Home extends StatelessWidget {
               );
             },
             icon: const Icon(Icons.person),
+          ),
+          IconButton(
+            onPressed: () async {
+              var statusCode = await httpService.logOut();
+              if (statusCode == 200) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginPage(),
+                    ),
+                    (Route<dynamic> route) => false);
+              }
+            },
+            icon: const Icon(Icons.outbond),
           ),
         ],
       ),

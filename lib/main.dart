@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bookshelf_ui/http_service.dart';
 import 'package:bookshelf_ui/login.dart';
 import 'package:bookshelf_ui/home.dart';
@@ -25,7 +23,12 @@ class MyApp extends StatelessWidget {
           future: getToken(),
           builder: (context, snapshot) {
             var res = snapshot.data;
-            return res == 'null' ? LoginPage() : Home(userEmail: res as String);
+            print('response in: $res');
+            if (res == null || res == 'null') {
+              return LoginPage();
+            } else {
+              return Home(userEmail: res as String);
+            }
           }),
     );
   }
