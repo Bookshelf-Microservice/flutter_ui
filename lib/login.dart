@@ -14,7 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   final _signInFormKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final HttpService _httpService = HttpService();
+  final UserHttpService _httpService = UserHttpService();
 
   @override
   void dispose() {

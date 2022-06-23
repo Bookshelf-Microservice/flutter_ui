@@ -7,7 +7,7 @@ import 'user_http_service.dart';
 class Profile extends StatelessWidget {
   String userEmail;
   Profile({Key? key, required this.userEmail}) : super(key: key);
-  final HttpService httpService = HttpService();
+  final UserHttpService httpService = UserHttpService();
 
   @override
   Widget build(BuildContext context) {

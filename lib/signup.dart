@@ -15,7 +15,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final HttpService _httpService = HttpService();
+  final UserHttpService _httpService = UserHttpService();
 
   @override
   void dispose() {

@@ -1,3 +1,4 @@
+import 'package:bookshelf_ui/book_http_service.dart';
 import 'package:bookshelf_ui/user_http_service.dart';
 import 'package:bookshelf_ui/login.dart';
 import 'package:bookshelf_ui/home.dart';
@@ -11,9 +12,11 @@ void main() {
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-  final HttpService _httpService = HttpService();
+  final UserHttpService _httpService = UserHttpService();
+  final BookHttpService _bookHttpService = BookHttpService();
   @override
   Widget build(BuildContext context) {
+    _bookHttpService.getAllBooks();
     return MaterialApp(
       title: 'Online Bookshelf App',
       debugShowCheckedModeBanner: false,

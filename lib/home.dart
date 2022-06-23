@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
   String userEmail;
-  final HttpService httpService = HttpService();
+  final UserHttpService httpService = UserHttpService();
 
   Home({Key? key, required this.userEmail}) : super(key: key);
 

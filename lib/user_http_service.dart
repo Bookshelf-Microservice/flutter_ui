@@ -3,10 +3,10 @@ import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-class HttpService {
+class UserHttpService {
   static final Future<SharedPreferences> _prefs =
       SharedPreferences.getInstance();
-  HttpService() {}
+  UserHttpService() {}
 
   setToken(var value) async {
     final SharedPreferences prefs = await _prefs;
