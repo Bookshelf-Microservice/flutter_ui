@@ -15,12 +15,10 @@ class UserHttpService {
   }
 
   loginUser(email, pass) async {
-    // var url = Uri.parse('http://10.0.2.2:8000/user/login');
     var url = Uri.parse('http://localhost:8000/user/login');
 
     var response = await post(url, body: {'email': email, 'password': pass});
     print('Response status: ${response.statusCode}');
-    // print('Response body login: ${response.body}');
     if (response.statusCode >= 400) {
       return response;
     }
@@ -29,7 +27,6 @@ class UserHttpService {
   }
 
   signupUser(username, email, password) async {
-    // var url = Uri.parse('http://10.0.2.2:8000/user/signup');
     var url = Uri.parse('http://localhost:8000/user/signup');
 
     Response response = await post(url, headers: {
@@ -44,7 +41,6 @@ class UserHttpService {
   }
 
   Future<User?> getUser(String email) async {
-    // var url = Uri.parse('http://10.0.2.2:8000/user/get');
     var url = Uri.parse('http://localhost:8000/user/get');
 
     print('içerde mi');
@@ -60,7 +56,6 @@ class UserHttpService {
   }
 
   Future<int> logOut() async {
-    // var url = Uri.parse('http://10.0.2.2:8000/user/logout');
     var url = Uri.parse('http://localhost:8000/user/logout');
 
     var response = await post(url, body: {});
@@ -71,7 +66,6 @@ class UserHttpService {
   }
 
   Future<int> deleteUser(String email) async {
-    // var url = Uri.parse('http://10.0.2.2:8000/user/delete');
     var url = Uri.parse('http://localhost:8000/user/delete');
 
     var response = await post(url, headers: {'email': email});
